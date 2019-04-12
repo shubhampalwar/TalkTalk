@@ -1,0 +1,2 @@
+let CHATS = [];
+exports = CHATS;
