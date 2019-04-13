@@ -1,13 +1,28 @@
-const { getUsers, getUser } = require('./handlers/queries')
-const { registration } = require('./handlers/mutations')
+const { getUsers, getUser, login, getChat } = require("./handlers/queries");
+const {
+  registration,
+  sendMessage,
+  deleteMessage
+} = require("./handlers/mutations");
+const { subscribe } = require('./handlers/subscriptions')
+
+const USER_ADDED = "USER_ADDED"
 
 const resolvers = {
   Query: {
-    getUsers: getUsers,
-    getUser: getUser,
+    getUsers,
+    getUser,
+    login,
+    getChat,
+    
   },
   Mutation: {
-    registration: registration,
+    registration,
+    sendMessage,
+    deleteMessage
+  },
+  Subscription: {
+    userSubscription: () => subscribe(USER_ADDED)
   }
 };
 

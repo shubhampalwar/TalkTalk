@@ -1,2 +1,4 @@
-module.exports = require('./chats');
-module.exports = require('./users');
+CHATS = require('./chats');
+USERS = require('./users');
+
+module.exports = { CHATS, USERS }

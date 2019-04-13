@@ -1,8 +1,9 @@
-const USERS = require("../../libs/constants");
+const { USERS } = require("../../libs/constants");
+const jwt = require("jsonwebtoken");
 
-module.exports = (_, arg) => {
-    const { id } = arg;
+module.exports = (_, __, context) => {
+  const { id } = jwt.verify(context.token, process.env.KEY);
+
   const users = USERS.filter(user => id !== user.id);
-  console.log('<<<<<<<<', users);
   return users;
 };
