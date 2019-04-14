@@ -1,4 +1,5 @@
 const express = require("express");
+const { PubSub } = require("apollo-server")
 const { ApolloServer } = require("apollo-server-express");
 const { notFoundRoute, errorHandlerRoute } = require('./libs/routes');
 
@@ -37,4 +38,7 @@ class Server {
       app.use(errorHandlerRoute);
   }
 }
-module.exports = Server;
+
+const pubsub = new PubSub();
+
+module.exports = { Server, pubsub };

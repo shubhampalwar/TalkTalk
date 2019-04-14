@@ -4,10 +4,11 @@ const {
   sendMessage,
   deleteMessage
 } = require("./handlers/mutations");
-const { subscribe } = require('./handlers/subscriptions')
+const subscribe = require('./handlers/subscriptions')
+const { pubsub } = require('./Server');
+const jwt = require('jsonwebtoken')
 
 const USER_ADDED = "USER_ADDED"
-
 const resolvers = {
   Query: {
     getUsers,
@@ -22,7 +23,15 @@ const resolvers = {
     deleteMessage
   },
   Subscription: {
-    userSubscription: () => subscribe(USER_ADDED)
+    userSubscription: {
+      subscribe: () => subscribe(USER_ADDED)
+    },
+    msgSubscription: {
+      subscribe: (_,__,context) => {
+        const { id } = jwt.verify(context.authorization, process.env.KEY)
+        return pubsub.asyncIterator([id])
+      }
+    } 
   }
 };
 

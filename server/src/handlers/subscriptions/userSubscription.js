@@ -1,8 +1,10 @@
-const { PubSub } = require("apollo-server-express");
-// const { USERS } = require("../../libs/constants");
+const { pubsub } = require('../../Server');
 
-const pubsub = new PubSub();
-
-const subscribe = (arg) => pubsub.asyncIterator([arg]);
+const subscribe = (arg) => {
+    
+    console.log("inside subscribe ", arg);
+    
+    return pubsub.asyncIterator([arg])
+}
 
 module.exports = subscribe;
