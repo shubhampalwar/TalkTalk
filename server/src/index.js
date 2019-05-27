@@ -16,7 +16,7 @@ const context = ({ req, connection }) => {
 };
 
 const initServer = () => {
-  server.bootstrap().setupApollo({ typeDefs, resolvers, context });
+  server.bootstrap().setupApollo({ typeDefs, resolvers });
 };
 
 initServer();
