@@ -1,6 +1,5 @@
 const { USERS } = require("../../libs/constants");
 const jwt = require("jsonwebtoken");
-const yup = require('yup')
 
 module.exports = (_, arg) => {
   const { email, password } = arg;
