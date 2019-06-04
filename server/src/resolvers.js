@@ -1,9 +1,5 @@
 const { getUsers, getUser, login, getChat } = require("./handlers/queries");
-const {
-  registration,
-  sendMessage,
-  deleteMessage
-} = require("./handlers/mutations");
+const { registration, sendMessage, deleteMessage } = require("./handlers/mutations");
 const subscribe = require('./handlers/subscriptions')
 const { pubsub } = require('./Server');
 const jwt = require('jsonwebtoken')
