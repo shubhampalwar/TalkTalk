@@ -1,7 +1,10 @@
 const express = require("express");
 const { PubSub } = require("apollo-server")
 const { ApolloServer } = require("apollo-server-express");
+const io = require('socket.io-client');
 const { notFoundRoute, errorHandlerRoute } = require('./libs/routes');
+
+let socket;
 
 class Server {
   constructor(config) {
@@ -10,11 +13,18 @@ class Server {
   }
 
   bootstrap() {
+    const { serviceURL } = this.config;
+    console.log(serviceURL)
+    this.socket = io(serviceURL, {
+      path: 'test'
+    })
+    // console.log(this.socket)
+    socket = this.socket;
     return this;
   }
 
   run() {
-    const { port, env } = this.config;
+    const { port } = this.config;
     const expServer = this.app.listen(port, () => {
       console.info(`🚀 Server ready at http://localhost:4000${this.server.graphqlPath}`)
     });
@@ -41,4 +51,4 @@ class Server {
 
 const pubsub = new PubSub();
 
-module.exports = { Server, pubsub };
+module.exports = { Server, pubsub, socket };
